@@ -22,11 +22,14 @@ public class MainActivity extends AppCompatActivity {
     private TextView display_tip;
     private TextView display_total_bill;
     private TextView tip_label;
+    private TextView messageToUser;
 
     private double amount = 0.0;
     private double percent = 0.0;
     private double tip = 0;
     private double total = 0;
+    String message = " ";
+
 
 
     private static final NumberFormat currencyFormat =
@@ -93,6 +96,7 @@ public class MainActivity extends AppCompatActivity {
         //display formatted bill ammount
         textView_BillAmount.setText(currencyFormat.format(amount));
 
+        messageToUser.setText(addCoolStuff(percent));
 
 
     }
@@ -103,22 +107,72 @@ public class MainActivity extends AppCompatActivity {
         display_tip = (TextView) findViewById(R.id.display_tip);
         display_total_bill = (TextView) findViewById(R.id.display_total_bill);
         tip_label= (TextView) findViewById(R.id.tip_label);
+        messageToUser=(TextView)findViewById(R.id.MessageToUser);
     }
 
 
     private void setters(){
 
+        final EditText editTextBillAmount = (EditText) findViewById(R.id.editText_BillAmount);
+        editTextBillAmount.addTextChangedListener(amountEditTextWatcher);
         percentage.setText(percentFormat.format(percent));
         display_tip.setText(currencyFormat.format(tip));
         tip_label.setText("Tip");
-        final EditText editTextBillAmount = (EditText) findViewById(R.id.editText_BillAmount);
-        editTextBillAmount.addTextChangedListener(amountEditTextWatcher);
+        messageToUser.setText(addCoolStuff(percent));
 
 
         SeekBar seekBarPercent = (SeekBar) findViewById(R.id.seekBar);
         seekBarPercent.setOnSeekBarChangeListener(seekbarListener);
 
     }
+
+
+    //Adding a cool message to the user depending on their tip percentage.
+    private String addCoolStuff(double val){
+
+        int unicode = 0x1F60A;
+
+        int monkey_no_see = 0x1F648;
+
+
+        val=val*100;
+        int locAmount = (int) amount;
+        if ( locAmount==0){
+
+            message = "How cool are you? " + getEmojiByUnicode(unicode);
+        }
+
+        else if (val<=10){
+           message= "Waiter wont serve you again!!";
+        }
+        else if (val>10 && val<18) {
+            message = " Waiter will give you poor service!!";
+        }
+        else if (val == 18.00){
+
+            message = "Perfect Tipper!!  " + getEmojiByUnicode(unicode);
+        }
+
+        else if(val>18.00 && val<50.00){
+
+            message= "Be Careful, Waiters will run to serve you!  " + getEmojiByUnicode(unicode);
+        }
+
+        else if (val > 50.00){
+
+            message= "Want to be my Boos?  " + getEmojiByUnicode(unicode);
+        }
+        else {message= "How Cool are you? ";}
+
+        return message;
+
+    }
+    public String getEmojiByUnicode(int unicode){
+        return new String(Character.toChars(unicode));
+    }
+
+
+
 
     private final SeekBar.OnSeekBarChangeListener seekbarListener = new SeekBar.OnSeekBarChangeListener() {
 

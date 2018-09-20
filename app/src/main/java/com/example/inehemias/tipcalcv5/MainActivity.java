@@ -1,18 +1,18 @@
 package com.example.inehemias.tipcalcv5;
 
-import android.icu.text.DecimalFormat;
-import android.os.Build;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.Log;
-import android.widget.TextView;
+        import android.icu.text.DecimalFormat;
+        import android.os.Build;
+        import android.support.v7.app.AppCompatActivity;
+        import android.os.Bundle;
+        import android.util.Log;
+        import android.widget.TextView;
 
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.widget.EditText;
-import android.widget.SeekBar;
+        import android.text.Editable;
+        import android.text.TextWatcher;
+        import android.widget.EditText;
+        import android.widget.SeekBar;
 
-import java.text.NumberFormat;
+        import java.text.NumberFormat;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -58,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
         public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
             //surround risky calculations with try catch (what if billAmount is 0 ?
             //charSequence is converted to a String and parsed to a double for you
+
             amount = Double.parseDouble(charSequence.toString()) / 100;
             //setText on the textView
             //perform tip and total calculation and update UI by calling calculate
@@ -143,7 +144,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         else if (val<=10){
-           message= "Waiter wont serve you again!!";
+            message= "Waiter wont serve you again!!";
         }
         else if (val>10 && val<18) {
             message = " Waiter will give you poor service!!";
@@ -160,7 +161,7 @@ public class MainActivity extends AppCompatActivity {
 
         else if (val > 50.00){
 
-            message= "Want to be my Boos?  " + getEmojiByUnicode(unicode);
+            message= "Want to be my Boss?  " + getEmojiByUnicode(unicode);
         }
         else {message= "How Cool are you? ";}
 
